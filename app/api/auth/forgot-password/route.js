@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { transporter } from "@/lib/mailer";
+import { sendPasswordResetEmail } from "@/lib/mailer";
 import crypto from "crypto";
 
 export async function POST(req) {
@@ -24,22 +24,10 @@ export async function POST(req) {
     });
 
     // Send Email
-    const resetUrl = `${process.env.NEXT_PUBLIC_URL}/reset-password?token=${resetToken}`;
+    const baseUrl = process.env.NEXT_PUBLIC_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
+    const resetUrl = `${baseUrl}/reset-password?token=${resetToken}`;
     
-    await transporter.sendMail({
-      from: `"Vendly Store" <${process.env.SMTP_USER}>`,
-      to: email,
-      subject: "Password Reset Request",
-      html: `
-        <div style="font-family: sans-serif; max-w: 600px; margin: 0 auto;">
-          <h2>Password Reset Request</h2>
-          <p>We received a request to reset your password. If you didn't make this request, you can safely ignore this email.</p>
-          <p>Click the link below to set a new password. This link will expire in 1 hour.</p>
-          <br/>
-          <a href="${resetUrl}" style="background-color: #0D9488; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">Reset Password</a>
-        </div>
-      `
-    });
+    await sendPasswordResetEmail(email, resetUrl);
 
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
