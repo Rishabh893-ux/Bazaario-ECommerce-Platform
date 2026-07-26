@@ -36,5 +36,8 @@
   },
   "prisma": {
     "seed": "node prisma/seed.js"
+  },
+  "overrides": {
+    "uuid": "^14.0.1"
   }
 }
