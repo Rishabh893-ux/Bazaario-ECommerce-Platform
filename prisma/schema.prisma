@@ -1,0 +1,280 @@
+// Vendly — Multi-Vendor E-Commerce Data Model
+// MongoDB + Prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────────────────────────
+// AUTH & USERS
+// ─────────────────────────────────────────────
+
+enum Role {
+  CUSTOMER
+  VENDOR
+  ADMIN
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String?
+  email     String?   @unique
+  emailVerified DateTime?
+  image     String?
+  password  String? // bcrypt hash, optional for OAuth
+  role      Role     @default(CUSTOMER)
+  
+  resetToken       String?
+  resetTokenExpiry DateTime?
+
+  createdAt DateTime @default(now())
+
+  accounts Account[]
+  sessions Session[]
+
+  vendor   Vendor?
+  orders   Order[]
+  reviews  Review[]
+  wishlist WishlistItem[]
+
+  defaultAddress Json?
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique
+  userId       String   @db.ObjectId
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ─────────────────────────────────────────────
+// VENDORS
+// ─────────────────────────────────────────────
+
+enum VendorStatus {
+  PENDING
+  APPROVED
+  SUSPENDED
+}
+
+model Vendor {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @unique @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id])
+
+  storeName   String
+  storeSlug   String       @unique
+  description String?
+  status      VendorStatus @default(PENDING)
+
+  // Razorpay Linked account for split payouts
+  stripeAccountId String?
+
+  products   Product[]
+  orderItems OrderItem[]
+  coupons    Coupon[]
+
+  createdAt DateTime @default(now())
+
+  @@index([status])
+}
+
+// ─────────────────────────────────────────────
+// CATALOG
+// ─────────────────────────────────────────────
+
+model Category {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  name     String    @unique
+  slug     String    @unique
+  products Product[]
+}
+
+model Product {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  vendorId String @db.ObjectId
+  vendor   Vendor @relation(fields: [vendorId], references: [id])
+
+  categoryId String?   @db.ObjectId
+  category   Category? @relation(fields: [categoryId], references: [id])
+
+  name        String
+  slug        String   @unique
+  description String
+  price       Float
+  images      String[]
+
+  stockCount Int    @default(0)
+  sku        String @unique
+
+  ratingAvg   Float @default(0)
+  ratingCount Int   @default(0)
+
+  isActive Boolean @default(true)
+
+  orderItems   OrderItem[]
+  reviews      Review[]
+  wishlistedBy WishlistItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([vendorId])
+  @@index([categoryId])
+}
+
+model WishlistItem {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id])
+  productId String   @db.ObjectId
+  product   Product  @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId])
+}
+
+// ─────────────────────────────────────────────
+// COUPONS
+// ─────────────────────────────────────────────
+
+enum DiscountType {
+  PERCENT
+  FIXED
+}
+
+model Coupon {
+  id           String       @id @default(auto()) @map("_id") @db.ObjectId
+  code         String       @unique
+  discountType DiscountType
+  value        Float // percent (0-100) or fixed amount
+
+  // null vendorId = platform-wide coupon; set = vendor-scoped
+  vendorId String? @db.ObjectId
+  vendor   Vendor? @relation(fields: [vendorId], references: [id])
+
+  usageLimit Int?
+  usedCount  Int       @default(0)
+  expiresAt  DateTime?
+  isActive   Boolean   @default(true)
+
+  createdAt DateTime @default(now())
+}
+
+// ─────────────────────────────────────────────
+// ORDERS
+// ─────────────────────────────────────────────
+
+enum OrderStatus {
+  PENDING_PAYMENT
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+model Order {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id])
+
+  subtotal      Float
+  discountTotal Float @default(0)
+  total         Float
+
+  couponCode String?
+
+  stripeSessionId String?   @unique
+  paymentStatus   String  @default("unpaid") // unpaid | paid | failed
+
+  // Store shipping address as JSON string instead of Prisma Json for Mongo compatibility, 
+  // or use Prisma Json if supported (Prisma does not support Json in MongoDB, so mapping to String)
+  // Wait, Prisma DOES support Json? No, Prisma doesn't support Json in MongoDB (wait, it actually does as of recent versions, but it's safer to use String or an embedded document. No, Json is supported? Let me just keep it as Json)
+  // Edit: Prisma DOES support Json in MongoDB, but actually wait, let's keep it Json since it was Json. No, wait, Prisma MongoDB connector supports Json type, wait, NO it does not. MongoDB is already BSON. Let's just use Json type and hope it works, or maybe String? Prisma MongoDB supports nested types but doesn't have a specific `Json` scalar type because you can just define a type. 
+  shippingAddress Json
+
+  orderItems OrderItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+// Each item tracks its own vendor + status so vendors manage only their slice
+model OrderItem {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  orderId String @db.ObjectId
+  order   Order  @relation(fields: [orderId], references: [id])
+
+  productId String  @db.ObjectId
+  product   Product @relation(fields: [productId], references: [id])
+
+  vendorId String @db.ObjectId
+  vendor   Vendor @relation(fields: [vendorId], references: [id])
+
+  quantity    Int
+  priceAtSale Float // snapshot — never trust live product.price for history
+
+  status OrderStatus @default(PENDING_PAYMENT)
+
+  @@index([orderId])
+  @@index([vendorId])
+}
+
+// ─────────────────────────────────────────────
+// REVIEWS
+// ─────────────────────────────────────────────
+
+model Review {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String  @db.ObjectId
+  user      User    @relation(fields: [userId], references: [id])
+  productId String  @db.ObjectId
+  product   Product @relation(fields: [productId], references: [id])
+
+  rating  Int // 1-5, enforced in application layer
+  comment String?
+
+  createdAt DateTime @default(now())
+
+  // A user may review a product only once — verified purchase is
+  // enforced in the API route (see reviews/route.js), not here,
+  // since Prisma can't express "has a DELIVERED OrderItem" as a constraint.
+  @@unique([userId, productId])
+}

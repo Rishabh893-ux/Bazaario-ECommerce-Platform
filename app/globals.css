@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 253 251 247;
+  --card: 255 255 255;
+  --text-ink: 44 36 32;
+  --border-subtle: 234 225 219;
+}
+
+.dark {
+  --background: 26 22 20; /* Deep Mocha */
+  --card: 44 36 32; /* Espresso */
+  --text-ink: 253 251 247; /* Cream text */
+  --border-subtle: 62 39 35;
+}
+
+body {
+  @apply bg-background text-ink transition-colors duration-200 ease-in-out;
+}
+
+@layer utilities {
+  .animated-link {
+    @apply relative inline-block transition-all duration-300 hover:text-brand hover:scale-110 origin-center;
+  }
+}
+
