@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import Stripe from "stripe";
@@ -55,3 +56,4 @@ export async function POST(req) {
 
   return NextResponse.json({ url: accountLink.url });
 }
+

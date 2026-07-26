@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 // app/api/admin/vendors/route.js
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
@@ -49,3 +50,4 @@ export async function PATCH(req) {
 
   return NextResponse.json(vendor);
 }
+

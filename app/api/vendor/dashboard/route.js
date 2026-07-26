@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 // app/api/vendor/dashboard/route.js
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
@@ -51,3 +52,4 @@ export async function GET() {
     lowStockProducts: lowStock,
   });
 }
+

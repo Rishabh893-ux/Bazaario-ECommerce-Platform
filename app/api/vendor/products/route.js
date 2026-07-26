@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 // app/api/vendor/products/route.js
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
@@ -17,3 +18,4 @@ export async function GET() {
 
   return NextResponse.json(products);
 }
+

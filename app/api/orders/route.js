@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 // app/api/orders/route.js
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
@@ -23,3 +24,4 @@ export async function GET(req) {
   const hasMore = orders.length > pageSize;
   return NextResponse.json({ orders: orders.slice(0, pageSize), page, hasMore });
 }
+

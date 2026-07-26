@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 // app/api/wishlist/route.js
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
@@ -41,3 +42,4 @@ export async function POST(req) {
   await prisma.wishlistItem.create({ data: { userId: session.user.id, productId } });
   return NextResponse.json({ wishlisted: true });
 }
+
