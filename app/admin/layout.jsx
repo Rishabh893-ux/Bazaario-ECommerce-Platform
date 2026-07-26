@@ -1,19 +1,28 @@
-export const dynamic = 'force-dynamic';
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import { redirect } from "next/navigation";
+"use client";
+
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import Link from "next/link";
-import { LayoutDashboard, Users, LogOut } from "lucide-react";
+import { LayoutDashboard, Users, LogOut, Loader2 } from "lucide-react";
 import Navbar from "../components/Navbar";
 
-import { cookies } from "next/headers";
+export default function AdminLayout({ children }) {
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
-export default async function AdminLayout({ children }) {
-  cookies(); // Hard-force Next.js to skip static generation for this layout
-  const session = await getServerSession(authOptions);
+  useEffect(() => {
+    if (status === "unauthenticated" || (session && session.user.role !== "ADMIN")) {
+      router.push("/");
+    }
+  }, [session, status, router]);
 
-  if (!session || session.user.role !== "ADMIN") {
-    redirect("/");
+  if (status === "loading" || !session || session.user.role !== "ADMIN") {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <Loader2 className="animate-spin text-brand" size={40} />
+      </div>
+    );
   }
 
   return (
