@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 // app/api/auth/register/route.js
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
