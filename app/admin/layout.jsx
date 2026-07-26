@@ -6,7 +6,10 @@ import Link from "next/link";
 import { LayoutDashboard, Users, LogOut } from "lucide-react";
 import Navbar from "../components/Navbar";
 
+import { cookies } from "next/headers";
+
 export default async function AdminLayout({ children }) {
+  cookies(); // Hard-force Next.js to skip static generation for this layout
   const session = await getServerSession(authOptions);
 
   if (!session || session.user.role !== "ADMIN") {
