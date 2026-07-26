@@ -11,7 +11,7 @@ async function requireAdmin() {
   return session;
 }
 
-export async function GET() {
+export async function GET(req) {
   const session = await requireAdmin();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 

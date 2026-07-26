@@ -8,7 +8,7 @@ import { prisma } from "@/lib/prisma";
 // Every query below is scoped by vendorId from the session — never
 // from a query param — so one vendor can never read another vendor's
 // revenue or order data by editing the request.
-export async function GET() {
+export async function GET(req) {
   const session = await getServerSession(authOptions);
   if (!session || session.user.role !== "VENDOR") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
