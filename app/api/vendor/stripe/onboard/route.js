@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 export const dynamic = 'force-dynamic';
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
@@ -8,6 +9,8 @@ import { prisma } from "@/lib/prisma";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function GET(req) {
+  headers();
+
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 

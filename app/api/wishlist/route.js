@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 export const dynamic = 'force-dynamic';
 // app/api/wishlist/route.js
 import { NextResponse } from "next/server";
@@ -6,6 +7,8 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 export async function GET(req) {
+  headers();
+
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 

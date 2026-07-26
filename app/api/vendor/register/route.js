@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 export const dynamic = 'force-dynamic';
 // app/api/vendor/register/route.js
 import { NextResponse } from "next/server";

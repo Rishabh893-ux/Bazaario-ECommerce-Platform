@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 export const dynamic = 'force-dynamic';
 // app/api/vendor/dashboard/route.js
 import { NextResponse } from "next/server";
@@ -9,6 +10,8 @@ import { prisma } from "@/lib/prisma";
 // from a query param — so one vendor can never read another vendor's
 // revenue or order data by editing the request.
 export async function GET(req) {
+  headers();
+
   const session = await getServerSession(authOptions);
   if (!session || session.user.role !== "VENDOR") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

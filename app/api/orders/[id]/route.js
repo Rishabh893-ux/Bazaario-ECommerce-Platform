@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 // app/api/orders/[id]/route.js
 export const dynamic = 'force-dynamic';
 import { NextResponse } from "next/server";
@@ -9,6 +10,8 @@ import Stripe from "stripe";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function GET(req, { params }) {
+  headers();
+
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 

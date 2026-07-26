@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 // app/api/products/route.js
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
@@ -8,6 +9,8 @@ export const dynamic = "force-dynamic";
 
 // Public listing — every vendor's active products, filterable and paginated.
 export async function GET(req) {
+  headers();
+
   const { searchParams } = new URL(req.url);
   const category = searchParams.get("category");
   const vendorSlug = searchParams.get("vendor");

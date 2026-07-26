@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 export const dynamic = 'force-dynamic';
 // app/api/admin/vendors/route.js
 import { NextResponse } from "next/server";
@@ -12,6 +13,8 @@ async function requireAdmin() {
 }
 
 export async function GET(req) {
+  headers();
+
   const session = await requireAdmin();
   if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
