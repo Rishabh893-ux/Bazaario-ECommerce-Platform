@@ -1,4 +1,3 @@
-export const dynamic = 'force-dynamic';
 // app/api/products/route.js
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
