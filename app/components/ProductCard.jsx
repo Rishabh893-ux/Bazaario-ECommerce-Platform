@@ -43,18 +43,21 @@ export default function ProductCard({ product, onAddToCart, initialWishlisted = 
       className="group rounded-squircle bg-card shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-brand-light cursor-pointer"
     >
       <div
-        className="relative h-60 flex items-center justify-center overflow-hidden bg-background"
+        className="relative h-80 flex items-center justify-center overflow-hidden bg-brand/5 border-b border-brand/10"
       >
         {product.images?.[0] ? (
-          <Image
-            src={product.images[0]}
-            alt={product.name}
-            fill
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
-          />
+          <>
+            <Image
+              src={product.images[0]}
+              alt={product.name}
+              fill
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              className="object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-brand/40 via-transparent to-brand/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          </>
         ) : (
-          <div className="h-32 w-32 rounded-2xl bg-card/60" />
+          <div className="h-32 w-32 rounded-2xl bg-brand/10" />
         )}
 
         <button
@@ -69,22 +72,19 @@ export default function ProductCard({ product, onAddToCart, initialWishlisted = 
         </button>
 
         {product.stockCount === 0 && (
-          <span className="absolute bottom-3 left-3 text-[11px] font-semibold bg-ink/80 text-background px-2 py-1 rounded-full">
+          <span className="absolute bottom-3 left-3 text-[11px] font-semibold bg-accent text-white px-2 py-1 rounded-full shadow-md">
             Out of stock
           </span>
         )}
         {product.stockCount > 0 && product.stockCount < 5 && (
-          <span className="absolute bottom-3 left-3 text-[11px] font-semibold bg-accent text-white px-2 py-1 rounded-full">
+          <span className="absolute bottom-3 left-3 text-[11px] font-semibold bg-ink/80 text-background px-2 py-1 rounded-full shadow-md">
             Only {product.stockCount} left
           </span>
         )}
       </div>
 
-      <div className="p-4">
-        <p className="text-[11px] font-medium text-brand uppercase tracking-wide truncate">
-          {product.vendor?.storeName ?? "Vendly Seller"}
-        </p>
-        <h3 className="mt-0.5 font-semibold text-ink text-sm leading-snug line-clamp-2">
+      <div className="p-5">
+        <h3 className="font-extrabold text-brand-dark text-[15px] leading-snug line-clamp-2">
           {product.name}
         </h3>
 

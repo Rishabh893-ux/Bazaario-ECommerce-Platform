@@ -56,18 +56,17 @@ export default function HomePage() {
 
       <main className="min-h-screen bg-background">
         {/* Hero */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-accent to-brand py-10 sm:py-14">
-          <div className="absolute inset-0 bg-[url('/pattern.svg')] opacity-10"></div>
-          <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-accent blur-3xl opacity-40 mix-blend-screen" />
-          <div className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-brand blur-3xl opacity-40 mix-blend-screen" />
+        <section className="relative overflow-hidden bg-gradient-to-br from-[#F3E5D8] to-[#E6D0BA] py-10 sm:py-14">
+          <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-[#D2B48C] blur-3xl opacity-40 mix-blend-multiply" />
+          <div className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-[#D2B48C] blur-3xl opacity-40 mix-blend-multiply" />
           <div className="relative max-w-6xl mx-auto px-6 text-center">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white max-w-3xl mx-auto leading-tight drop-shadow-lg">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-[#1E293B] max-w-3xl mx-auto leading-tight drop-shadow-sm">
               Independent sellers.<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-yellow-100 to-white drop-shadow-md">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1E293B] via-[#334155] to-[#1E293B]">
                 One effortless checkout.
               </span>
             </h1>
-            <p className="mt-6 text-cyan-50 max-w-xl mx-auto text-lg sm:text-xl font-medium">
+            <p className="mt-6 text-[#334155] max-w-xl mx-auto text-lg sm:text-xl font-medium">
               Every listing on Vendly comes from a different small business — browse them all in one place.
             </p>
           </div>
