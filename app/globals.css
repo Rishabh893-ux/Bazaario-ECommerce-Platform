@@ -3,17 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --background: 253 251 247;
-  --card: 255 255 255;
-  --text-ink: 44 36 32;
-  --border-subtle: 234 225 219;
+  --background: 255 255 255; /* Pristine White */
+  --card: 248 250 252; /* Slate-50 */
+  --text-ink: 15 23 42; /* Slate-900 */
+  --border-subtle: 226 232 240; /* Slate-200 */
 }
 
 .dark {
-  --background: 26 22 20; /* Deep Mocha */
-  --card: 44 36 32; /* Espresso */
-  --text-ink: 253 251 247; /* Cream text */
-  --border-subtle: 62 39 35;
+  --background: 15 23 42; /* Slate-900 */
+  --card: 30 41 59; /* Slate-800 */
+  --text-ink: 248 250 252; /* Slate-50 */
+  --border-subtle: 51 65 85; /* Slate-700 */
 }
 
 body {

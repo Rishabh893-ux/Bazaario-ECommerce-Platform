@@ -56,10 +56,10 @@ export default function HomePage() {
 
       <main className="min-h-screen bg-background">
         {/* Hero */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-[#ffe000] to-[#799f0c] py-10 sm:py-14">
+        <section className="relative overflow-hidden bg-gradient-to-br from-accent to-brand py-10 sm:py-14">
           <div className="absolute inset-0 bg-[url('/pattern.svg')] opacity-10"></div>
-          <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-[#ffe000] blur-3xl opacity-40 mix-blend-screen" />
-          <div className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-[#799f0c] blur-3xl opacity-40 mix-blend-screen" />
+          <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-accent blur-3xl opacity-40 mix-blend-screen" />
+          <div className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-brand blur-3xl opacity-40 mix-blend-screen" />
           <div className="relative max-w-6xl mx-auto px-6 text-center">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white max-w-3xl mx-auto leading-tight drop-shadow-lg">
               Independent sellers.<br />

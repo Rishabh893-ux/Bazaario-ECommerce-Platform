@@ -9,11 +9,11 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-background py-20 px-6 relative overflow-hidden">
       {/* Background ambient light */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-[#ffe000]/10 blur-[100px] pointer-events-none"></div>
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-[#799f0c]/10 blur-[100px] pointer-events-none"></div>
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-accent/10 blur-[100px] pointer-events-none"></div>
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-brand/10 blur-[100px] pointer-events-none"></div>
       
       <div className="absolute top-6 left-6 md:top-8 md:left-12 z-20">
-        <Link href="/" className="inline-flex items-center gap-2 text-ink/70 hover:text-[#799f0c] transition-colors text-sm font-medium bg-card px-4 py-2 rounded-full border border-[#799f0c]/20 shadow-sm hover:shadow-md backdrop-blur-sm">
+        <Link href="/" className="inline-flex items-center gap-2 text-ink/70 hover:text-brand transition-colors text-sm font-medium bg-card px-4 py-2 rounded-full border border-brand/20 shadow-sm hover:shadow-md backdrop-blur-sm">
           <ArrowLeft size={16} />
           Go Back
         </Link>
@@ -21,7 +21,7 @@ export default function ContactPage() {
 
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#ffe000] to-[#799f0c] mb-6 pb-2">
+          <h1 className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-accent to-brand mb-6 pb-2">
             Get in Touch
           </h1>
           <p className="text-lg md:text-xl text-ink/70 max-w-2xl mx-auto font-medium">
@@ -32,7 +32,7 @@ export default function ContactPage() {
         <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
           {/* Contact Information Panel */}
           <div className="lg:col-span-2 space-y-8">
-            <div className="bg-gradient-to-br from-[#ffe000] to-[#799f0c] p-10 rounded-squircle text-white shadow-2xl h-full flex flex-col justify-between">
+            <div className="bg-gradient-to-br from-accent to-brand p-10 rounded-squircle text-white shadow-2xl h-full flex flex-col justify-between">
               <div>
                 <h3 className="text-3xl font-bold mb-8">Contact Info</h3>
                 <div className="space-y-8">
@@ -72,29 +72,29 @@ export default function ContactPage() {
           </div>
 
           {/* Contact Form */}
-          <div className="lg:col-span-3 bg-card border border-[#799f0c]/20 p-10 rounded-squircle shadow-xl shadow-[#799f0c]/5">
+          <div className="lg:col-span-3 bg-card border border-brand/20 p-10 rounded-squircle shadow-xl shadow-brand/5">
             <h3 className="text-2xl font-bold text-ink mb-8">Send us a message</h3>
             <form className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-semibold text-ink/80 mb-2">First Name</label>
-                  <input type="text" className="w-full px-5 py-3.5 bg-background border border-ink/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#799f0c] focus:border-transparent transition-all shadow-sm" placeholder="John" />
+                  <input type="text" className="w-full px-5 py-3.5 bg-background border border-ink/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-all shadow-sm" placeholder="John" />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-ink/80 mb-2">Last Name</label>
-                  <input type="text" className="w-full px-5 py-3.5 bg-background border border-ink/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#799f0c] focus:border-transparent transition-all shadow-sm" placeholder="Doe" />
+                  <input type="text" className="w-full px-5 py-3.5 bg-background border border-ink/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-all shadow-sm" placeholder="Doe" />
                 </div>
               </div>
               <div>
                 <label className="block text-sm font-semibold text-ink/80 mb-2">Email Address</label>
-                <input type="email" className="w-full px-5 py-3.5 bg-background border border-ink/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#799f0c] focus:border-transparent transition-all shadow-sm" placeholder="john@example.com" />
+                <input type="email" className="w-full px-5 py-3.5 bg-background border border-ink/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-all shadow-sm" placeholder="john@example.com" />
               </div>
               <div>
                 <label className="block text-sm font-semibold text-ink/80 mb-2">Message</label>
-                <textarea className="w-full px-5 py-3.5 bg-background border border-ink/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#799f0c] focus:border-transparent transition-all resize-none shadow-sm" rows="5" placeholder="How can we help you?"></textarea>
+                <textarea className="w-full px-5 py-3.5 bg-background border border-ink/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-all resize-none shadow-sm" rows="5" placeholder="How can we help you?"></textarea>
               </div>
               <div className="pt-2">
-                <button type="button" className="w-full py-4 bg-gradient-to-r from-[#ffe000] to-[#799f0c] text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-[#799f0c]/40 hover:-translate-y-1 transition-all duration-300">
+                <button type="button" className="w-full py-4 bg-gradient-to-r from-accent to-brand text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-brand/40 hover:-translate-y-1 transition-all duration-300">
                   Send Message
                 </button>
               </div>

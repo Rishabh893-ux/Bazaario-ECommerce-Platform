@@ -9,11 +9,11 @@ module.exports = {
         card: "rgb(var(--card) / <alpha-value>)",
         ink: "rgb(var(--text-ink) / <alpha-value>)",
         brand: {
-          DEFAULT: "#799f0c", // Olive Green
-          dark: "#5a7809",
+          DEFAULT: "#334155", // Slate Gray
+          dark: "#1E293B",    // Dark Slate
           light: "rgb(var(--border-subtle) / <alpha-value>)",
         },
-        accent: "#ffe000", // Yellow
+        accent: "#B45309", // Copper/Rust
       },
       borderRadius: {
         squircle: "1.25rem",
