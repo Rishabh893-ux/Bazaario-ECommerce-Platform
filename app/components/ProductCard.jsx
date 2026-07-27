@@ -43,7 +43,7 @@ export default function ProductCard({ product, onAddToCart, initialWishlisted = 
       className="group rounded-squircle bg-card shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-brand-light cursor-pointer"
     >
       <div
-        className="relative h-80 flex items-center justify-center overflow-hidden bg-brand/5 border-b border-brand/10"
+        className="relative h-80 flex items-center justify-center overflow-hidden bg-white border-b border-brand/10 p-4"
       >
         {product.images?.[0] ? (
           <>
@@ -52,12 +52,12 @@ export default function ProductCard({ product, onAddToCart, initialWishlisted = 
               alt={product.name}
               fill
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-              className="object-cover transition-transform duration-700 group-hover:scale-110"
+              className="object-contain p-4 transition-transform duration-700 group-hover:scale-110 mix-blend-multiply"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-brand/40 via-transparent to-brand/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           </>
         ) : (
-          <div className="h-32 w-32 rounded-2xl bg-brand/10" />
+          <div className="h-32 w-32 rounded-2xl bg-brand/5" />
         )}
 
         <button
@@ -84,7 +84,7 @@ export default function ProductCard({ product, onAddToCart, initialWishlisted = 
       </div>
 
       <div className="p-5">
-        <h3 className="font-extrabold text-brand-dark text-[15px] leading-snug line-clamp-2">
+        <h3 className="font-extrabold text-ink text-[15px] leading-snug line-clamp-2">
           {product.name}
         </h3>
 
