@@ -4,18 +4,31 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { Heart, ShoppingCart, Search, LogOut, User, Hexagon } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CartBadge from "./CartBadge";
 import ThemeToggle from "./ThemeToggle";
 
-export default function Navbar({ initialQuery = "" }) {
+export default function Navbar() {
   const { data: session } = useSession();
   const router = useRouter();
-  const [query, setQuery] = useState(initialQuery);
+  const [query, setQuery] = useState("");
+  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
+
+  useEffect(() => {
+    // Safely get query params on client-side to avoid Next.js useSearchParams Suspense boundaries
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      setQuery(params.get("q") || "");
+    }
+  }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
-    router.push(query ? `/?q=${encodeURIComponent(query)}` : "/");
+    if (query.trim()) {
+      router.push(`/?q=${encodeURIComponent(query.trim())}`);
+    } else {
+      router.push("/");
+    }
   };
 
   return (
@@ -43,34 +56,40 @@ export default function Navbar({ initialQuery = "" }) {
         </nav>
 
         {/* Icons */}
-        <div className="flex items-center gap-5 text-white">
-          <form onSubmit={handleSearch} className="hidden sm:flex items-center">
-            <button type="submit" className="hover:text-accent transition-transform hover:scale-110">
-              <Search size={18} strokeWidth={1.5} />
+        <div className="flex items-center gap-3 sm:gap-5 text-white">
+          <form 
+            onSubmit={handleSearch}
+            className={`flex items-center rounded-full transition-all duration-300 ease-in-out mr-2 sm:mr-4 ${isSearchExpanded ? 'bg-white/10 px-3 py-1 focus-within:ring-1 focus-within:ring-accent w-48 lg:w-64' : 'w-8 bg-transparent'}`}
+          >
+            {isSearchExpanded && (
+              <input 
+                type="text" 
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search products..." 
+                className="bg-transparent border-none focus:outline-none text-white text-sm w-full placeholder-white/70"
+                autoFocus
+                onBlur={() => {
+                  // Only collapse if empty, wait a tiny bit to allow button clicks to register
+                  setTimeout(() => {
+                    if (!query) setIsSearchExpanded(false);
+                  }, 150);
+                }}
+              />
+            )}
+            <button 
+              type={isSearchExpanded ? "submit" : "button"} 
+              onClick={(e) => {
+                if (!isSearchExpanded) {
+                  e.preventDefault();
+                  setIsSearchExpanded(true);
+                }
+              }}
+              className="hover:text-accent transition-transform hover:scale-110 text-white cursor-pointer ml-auto shrink-0 flex items-center justify-center p-1"
+            >
+              <Search size={18} strokeWidth={isSearchExpanded ? 2 : 1.5} className="pointer-events-none" />
             </button>
           </form>
-
-          {session ? (
-            <div className="relative group cursor-pointer flex items-center">
-              <div className="hover:text-accent transition-transform hover:scale-110">
-                <User size={18} strokeWidth={1.5} />
-              </div>
-              <div className="absolute right-0 top-full mt-2 w-40 bg-card border border-brand-light rounded-md shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-                <div className="py-2 text-ink">
-                  <Link href="/profile" className="px-4 py-2 text-sm hover:bg-brand/10 hover:text-brand transition-colors flex items-center gap-2"><User size={14} /> Profile</Link>
-                  {session?.user?.role === "ADMIN" && (
-                    <Link href="/admin" className="px-4 py-2 text-sm hover:bg-brand/10 hover:text-brand transition-colors flex items-center gap-2"><User size={14} /> Admin</Link>
-                  )}
-                  <Link href="/orders" className="px-4 py-2 text-sm hover:bg-brand/10 hover:text-brand transition-colors flex items-center gap-2">Orders</Link>
-                  <button onClick={() => signOut({ callbackUrl: "/" })} className="w-full text-left px-4 py-2 text-sm hover:bg-brand/10 hover:text-brand transition-colors flex items-center gap-2"><LogOut size={14} /> Sign out</button>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <Link href="/login" className="hover:text-accent transition-transform hover:scale-110">
-              <User size={18} strokeWidth={1.5} />
-            </Link>
-          )}
 
           <Link href="/wishlist" className="relative hover:text-accent transition-transform hover:scale-110">
             <Heart size={18} strokeWidth={1.5} />
@@ -84,6 +103,26 @@ export default function Navbar({ initialQuery = "" }) {
             </div>
           </Link>
           <ThemeToggle className="text-white hover:text-accent" />
+          {session ? (
+            <div className="relative group cursor-pointer flex items-center">
+              <div className="hover:text-accent transition-transform hover:scale-110">
+                <User size={18} strokeWidth={1.5} />
+              </div>
+              <div className="absolute right-0 top-full mt-2 w-40 bg-card border border-brand-light rounded-md shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                <div className="py-2 text-ink">
+                  <Link href="/profile" className="px-4 py-2 text-sm hover:bg-brand/10 hover:text-brand transition-colors flex items-center gap-2"><User size={14} /> Profile</Link>
+                  {session?.user?.role === "ADMIN" && (
+                    <Link href="/admin" className="px-4 py-2 text-sm hover:bg-brand/10 hover:text-brand transition-colors flex items-center gap-2"><User size={14} /> Admin</Link>
+                  )}
+                  <button onClick={() => signOut({ callbackUrl: "/" })} className="w-full text-left px-4 py-2 text-sm hover:bg-brand/10 hover:text-brand transition-colors flex items-center gap-2"><LogOut size={14} /> Sign out</button>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <Link href="/login" className="hover:text-accent transition-transform hover:scale-110">
+              <User size={18} strokeWidth={1.5} />
+            </Link>
+          )}
         </div>
 
       </div>

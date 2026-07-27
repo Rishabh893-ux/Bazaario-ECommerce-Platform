@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -11,7 +11,7 @@ import { addToCart } from "@/lib/features/cart/cartSlice";
 
 const CATEGORY_CHIPS = ["All", "Electronics", "Home", "Fashion", "Beauty", "Sports"];
 
-export default function HomePage() {
+function HomeContent() {
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
   const initialQuery = searchParams.get("q") ?? "";
@@ -85,8 +85,8 @@ export default function HomePage() {
                 onClick={() => { setActiveCategory(c); setPage(1); }}
                 className={`px-5 py-2 rounded-full text-sm font-bold transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5 ${
                   activeCategory === c
-                    ? "bg-gradient-to-r from-brand to-brand-dark text-white shadow-brand/20 border border-transparent"
-                    : "bg-card text-ink/70 border-2 border-brand/10 hover:border-brand/30 hover:bg-brand/5"
+                    ? "bg-gradient-to-r from-accent to-[#C2A37E] text-white shadow-accent/20 border border-transparent"
+                    : "bg-card text-ink/70 border-2 border-accent/20 hover:border-accent/40 hover:bg-accent/5"
                 }`}
               >
                 {c}
@@ -118,7 +118,7 @@ export default function HomePage() {
                 <button
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
                   disabled={page === 1}
-                  className="px-6 py-2.5 rounded-full border-2 border-brand/20 hover:border-brand hover:bg-brand/5 text-ink text-sm font-bold disabled:opacity-40 transition-all duration-300 shadow-sm"
+                  className="px-6 py-2.5 rounded-full border-2 border-accent/20 hover:border-accent hover:bg-accent/5 text-ink text-sm font-bold disabled:opacity-40 transition-all duration-300 shadow-sm"
                 >
                   Previous
                 </button>
@@ -126,7 +126,7 @@ export default function HomePage() {
                 <button
                   onClick={() => setPage((p) => p + 1)}
                   disabled={!hasMore}
-                  className="px-6 py-2.5 rounded-full border-2 border-brand/20 hover:border-brand hover:bg-brand/5 text-ink text-sm font-bold disabled:opacity-40 transition-all duration-300 shadow-sm"
+                  className="px-6 py-2.5 rounded-full border-2 border-accent/20 hover:border-accent hover:bg-accent/5 text-ink text-sm font-bold disabled:opacity-40 transition-all duration-300 shadow-sm"
                 >
                   Next
                 </button>
@@ -137,5 +137,13 @@ export default function HomePage() {
       </main>
       <Footer />
     </>
+  );
+}
+
+export default function HomePage() {
+  return (
+    <Suspense fallback={<div className="h-screen flex items-center justify-center">Loading Vendly...</div>}>
+      <HomeContent />
+    </Suspense>
   );
 }

@@ -13,7 +13,7 @@ module.exports = {
           dark: "#1E293B",    // Dark Slate
           light: "rgb(var(--border-subtle) / <alpha-value>)",
         },
-        accent: "#B45309", // Copper/Rust
+        accent: "#D2B48C", // Sand Beige
       },
       borderRadius: {
         squircle: "1.25rem",

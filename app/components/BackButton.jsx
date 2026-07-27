@@ -16,13 +16,18 @@ export default function BackButton() {
   // Do not show on home page or if not mounted
   if (!mounted || pathname === "/") return null;
 
+  const hasNavbar = ["/wishlist", "/vendor", "/profile", "/admin"].some(p => pathname.startsWith(p));
+  const topClass = hasNavbar ? "top-24 md:top-28" : "top-6 md:top-8";
+  const leftClass = pathname.startsWith("/admin") ? "left-6 md:left-[280px]" : "left-6 md:left-12";
+
   return (
     <button
       onClick={() => router.back()}
-      className="fixed bottom-6 left-6 z-50 flex items-center justify-center w-12 h-12 bg-card text-ink rounded-full border border-brand-light shadow-lg hover:bg-brand/10 hover:text-brand transition-all hover:scale-105 active:scale-95 group"
+      className={`fixed ${topClass} ${leftClass} z-50 inline-flex items-center gap-2 text-ink/70 hover:text-ink transition-colors text-sm font-medium bg-card px-4 py-2 rounded-full border border-brand-light shadow-sm hover:shadow-md backdrop-blur-sm group`}
       aria-label="Go back"
     >
-      <ArrowLeft size={24} className="group-hover:-translate-x-1 transition-transform" />
+      <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+      Go Back
     </button>
   );
 }

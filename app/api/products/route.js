@@ -22,7 +22,7 @@ export async function GET(req) {
     isActive: true,
     ...(category && { category: { slug: category } }),
     ...(vendorSlug && { vendor: { storeSlug: vendorSlug } }),
-    ...(q && { name: { contains: q, mode: "insensitive" } }),
+    ...(q && { name: { contains: q } }),
   };
 
   // Fetch one extra row to know whether another page exists, without a
