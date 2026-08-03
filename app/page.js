@@ -113,13 +113,13 @@ function HomeContent() {
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
               <Link
                 href="#products"
-                className="px-8 py-3.5 rounded-full bg-ink text-background font-bold text-sm hover:bg-brand-dark transition-all shadow-lg hover:-translate-y-0.5 hover:shadow-xl"
+                className="px-8 py-3.5 rounded-full bg-ink text-background font-bold text-sm hover:bg-brand-dark hover:text-white dark:hover:text-white transition-all shadow-lg hover:-translate-y-0.5 hover:shadow-xl"
               >
                 Shop Now
               </Link>
               <Link
                 href="/deals"
-                className="px-8 py-3.5 rounded-full bg-accent/10 border border-accent/30 text-accent-dark dark:text-accent font-bold text-sm hover:bg-accent hover:text-white transition-all shadow-sm hover:-translate-y-0.5 flex items-center gap-2"
+                className="px-8 py-3.5 rounded-full bg-accent/10 border border-accent/30 text-accent-dark dark:text-accent font-bold text-sm hover:bg-accent hover:text-white dark:hover:text-white transition-all shadow-sm hover:-translate-y-0.5 flex items-center gap-2"
               >
                 <Zap size={15} className="fill-current" /> Browse Deals
               </Link>
