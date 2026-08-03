@@ -203,8 +203,10 @@ stripe listen --forward-to localhost:3000/api/webhooks/stripe
 | `/vendor/dashboard` | Vendor analytics & sales overview |
 | `/vendor/products` | Inventory management |
 | `/vendor/onboarding` | Stripe Connect setup flow |
+| `/vendor/help` | Seller support and resources |
 | `/admin` | Admin moderation panel |
 | `/login` / `/register` | Auth pages |
+| `/privacy` / `/terms` | Legal and compliance pages |
 
 ---
 
