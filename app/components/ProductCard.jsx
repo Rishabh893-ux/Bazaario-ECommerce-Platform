@@ -144,7 +144,7 @@ export default function ProductCard({ product, onAddToCart, initialWishlisted = 
               }}
               disabled={isOutOfStock}
               className="h-9 px-4 rounded-full bg-ink hover:bg-brand-dark disabled:opacity-40
-                         text-background text-xs font-bold transition-all duration-200 shadow
+                         text-background hover:text-white dark:hover:text-white text-xs font-bold transition-all duration-200 shadow
                          hover:shadow-brand/20 hover:-translate-y-0.5 whitespace-nowrap"
               aria-label="Buy now"
             >
