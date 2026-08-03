@@ -12,14 +12,14 @@ module.exports = {
         card: "rgb(var(--card) / <alpha-value>)",
         ink: "rgb(var(--text-ink) / <alpha-value>)",
         brand: {
-          DEFAULT: "#334155",
-          dark: "#1E293B",
+          DEFAULT: "#18181B",
+          dark: "#09090B",
           light: "rgb(var(--border-subtle) / <alpha-value>)",
         },
         accent: {
-          DEFAULT: "#D2B48C",
-          dark: "#C2A37E",
-          light: "#EDD9BF",
+          DEFAULT: "#6366F1",
+          dark: "#4F46E5",
+          light: "#E0E7FF",
         },
       },
       borderRadius: {
@@ -27,9 +27,9 @@ module.exports = {
         "squircle-lg": "1.75rem",
       },
       boxShadow: {
-        "glow-accent": "0 0 30px rgba(210, 180, 140, 0.35)",
-        "glow-brand": "0 0 30px rgba(51, 65, 85, 0.2)",
-        "card-hover": "0 16px 40px -8px rgba(15, 23, 42, 0.15)",
+        "glow-accent": "0 0 30px rgba(99, 102, 241, 0.4)",
+        "glow-brand": "0 0 30px rgba(24, 24, 27, 0.15)",
+        "card-hover": "0 16px 40px -8px rgba(9, 9, 11, 0.15)",
       },
       animation: {
         "fade-up": "fadeSlideUp 0.55s ease-out both",
@@ -57,8 +57,8 @@ module.exports = {
           "100%": { backgroundPosition: "600px 0" },
         },
         glowPulse: {
-          "0%, 100%": { boxShadow: "0 0 20px rgba(210, 180, 140, 0.35)" },
-          "50%": { boxShadow: "0 0 45px rgba(210, 180, 140, 0.55)" },
+          "0%, 100%": { boxShadow: "0 0 20px rgba(99, 102, 241, 0.35)" },
+          "50%": { boxShadow: "0 0 45px rgba(99, 102, 241, 0.6)" },
         },
         floatOrb: {
           "0%, 100%": { transform: "translateY(0px) scale(1)" },
