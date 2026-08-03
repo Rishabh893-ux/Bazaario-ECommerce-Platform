@@ -222,12 +222,6 @@ Contributions, issues, and feature requests are welcome!
 
 ---
 
-## 📄 License
-
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
-
----
-
 <div align="center">
-  <p>Built with ❤️ by <a href="https://github.com/RishabhKasaudhan">Rishabh Kasaudhan</a></p>
+  <p>Produced by <a href="https://github.com/RishabhKasaudhan">Rishabh Kasaudhan</a></p>
 </div>
