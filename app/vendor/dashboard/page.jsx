@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Package, TrendingUp, AlertTriangle, ShoppingBag, Plus, List, ArrowUpRight } from "lucide-react";
+import { Package, TrendingUp, AlertTriangle, ShoppingBag, Plus, List, ArrowUpRight, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import {
   BarChart,
@@ -96,7 +96,7 @@ export default function VendorDashboardPage() {
           <Link href="/vendor/products/new" className="px-4 py-2.5 rounded-full bg-ink hover:bg-brand-dark text-white text-sm font-bold transition-all shadow-md hover:-translate-y-0.5 flex items-center gap-2">
             <Plus size={16} /> Add Product
           </Link>
-          <Link href="/vendor/products" className="px-4 py-2.5 rounded-full bg-card border border-brand-light hover:border-brand-light/80 hover:bg-white text-ink text-sm font-bold transition-all shadow-sm flex items-center gap-2">
+          <Link href="/vendor/products" className="px-4 py-2.5 rounded-full bg-card border border-brand-light hover:border-brand-light/80 hover:bg-card text-ink text-sm font-bold transition-all shadow-sm flex items-center gap-2">
             <List size={16} /> Inventory
           </Link>
         </div>

@@ -73,13 +73,13 @@ export default function Footer() {
           <div>
             <h4 className="font-black text-ink mb-6 text-sm uppercase tracking-widest">Shop</h4>
             <ul className="space-y-3.5 text-sm font-medium text-ink/60">
-              <li><Link href="/" className="animated-link hover:text-brand">Browse Catalog</Link></li>
-              <li><Link href="/deals" className="animated-link hover:text-brand">Flash Deals</Link></li>
-              <li><Link href="/blog" className="animated-link hover:text-brand">Journal & Blog</Link></li>
-              <li><Link href="/help" className="animated-link hover:text-brand">Help Center</Link></li>
-              <li><Link href="/orders" className="animated-link hover:text-brand">Track an Order</Link></li>
-              <li><Link href="/wishlist" className="animated-link hover:text-brand">My Wishlist</Link></li>
-              <li><Link href="/cart" className="animated-link hover:text-brand">Shopping Cart</Link></li>
+              <li><Link href="/" className="animated-link hover:text-brand dark:hover:text-white">Browse Catalog</Link></li>
+              <li><Link href="/deals" className="animated-link hover:text-brand dark:hover:text-white">Flash Deals</Link></li>
+              <li><Link href="/blog" className="animated-link hover:text-brand dark:hover:text-white">Journal & Blog</Link></li>
+              <li><Link href="/help" className="animated-link hover:text-brand dark:hover:text-white">Help Center</Link></li>
+              <li><Link href="/orders" className="animated-link hover:text-brand dark:hover:text-white">Track an Order</Link></li>
+              <li><Link href="/wishlist" className="animated-link hover:text-brand dark:hover:text-white">My Wishlist</Link></li>
+              <li><Link href="/cart" className="animated-link hover:text-brand dark:hover:text-white">Shopping Cart</Link></li>
             </ul>
           </div>
 
@@ -88,12 +88,12 @@ export default function Footer() {
             <h4 className="font-black text-ink mb-6 text-sm uppercase tracking-widest">Sell</h4>
             <ul className="space-y-3.5 text-sm font-medium text-ink/60">
               {isVendor ? (
-                <li><Link href="/vendor/dashboard" className="animated-link hover:text-brand">Vendor Dashboard</Link></li>
+                <li><Link href="/vendor/dashboard" className="animated-link hover:text-brand dark:hover:text-white">Vendor Dashboard</Link></li>
               ) : (
-                <li><Link href="/vendor/onboarding" className="animated-link hover:text-brand">Become a Vendor</Link></li>
+                <li><Link href="/vendor/onboarding" className="animated-link hover:text-brand dark:hover:text-white">Become a Vendor</Link></li>
               )}
-              <li><Link href="/vendor/policies" className="animated-link hover:text-brand">Seller Policies</Link></li>
-              <li><Link href="/vendor/help" className="animated-link hover:text-brand">Seller Help Center</Link></li>
+              <li><Link href="/vendor/policies" className="animated-link hover:text-brand dark:hover:text-white">Seller Policies</Link></li>
+              <li><Link href="/vendor/help" className="animated-link hover:text-brand dark:hover:text-white">Seller Help Center</Link></li>
             </ul>
           </div>
 
@@ -107,7 +107,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <div className="p-1.5 bg-brand-light/30 rounded-md text-brand shrink-0"><Mail size={14} /></div>
-                <a href="mailto:support@vendly.com" className="animated-link hover:text-brand">support@vendly.com</a>
+                <a href="mailto:support@vendly.com" className="animated-link hover:text-brand dark:hover:text-white">support@vendly.com</a>
               </li>
             </ul>
           </div>

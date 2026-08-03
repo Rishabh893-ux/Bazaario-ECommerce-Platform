@@ -122,7 +122,7 @@ export default function CartPage() {
                   <div className="flex items-center gap-4 sm:w-1/2 min-w-0 pr-8 sm:pr-0">
                     <Link href={`/product/${item.productId}`} className="h-20 w-20 sm:h-24 sm:w-24 rounded-2xl bg-white border border-brand-light/40 flex-shrink-0 flex items-center justify-center overflow-hidden">
                       {item.image ? (
-                        <img src={item.image} alt={item.name} className="h-full w-full object-contain p-2 mix-blend-multiply group-hover:scale-110 transition-transform duration-500" />
+                        <img src={item.image} alt={item.name} className="h-full w-full object-contain p-2 group-hover:scale-110 transition-transform duration-500" />
                       ) : (
                         <div className="h-10 w-10 rounded-xl bg-brand/5" />
                       )}

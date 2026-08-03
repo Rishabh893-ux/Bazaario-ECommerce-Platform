@@ -57,7 +57,7 @@ export default function ProductCard({ product, onAddToCart, initialWishlisted = 
               alt={product.name}
               fill
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-              className="object-contain p-3 transition-transform duration-500 group-hover:scale-108 mix-blend-multiply dark:mix-blend-normal"
+              className="object-contain p-3 transition-transform duration-500 group-hover:scale-108"
             />
             {/* hover overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
@@ -76,7 +76,7 @@ export default function ProductCard({ product, onAddToCart, initialWishlisted = 
                       transition-all duration-300 hover:scale-115
                       ${wishlisted
                         ? "bg-brand text-white shadow-brand/30"
-                        : "bg-white/90 dark:bg-card/90 text-ink/40 hover:bg-white hover:text-brand"
+                        : "bg-white/90 dark:bg-card/90 text-ink/40 hover:bg-white dark:hover:bg-card hover:text-brand"
                       }`}
         >
           <Heart size={16} className={wishlisted ? "fill-white" : ""} />

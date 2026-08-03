@@ -2,9 +2,9 @@
 
 import { Suspense, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { Search, ShieldCheck, Truck, Users } from "lucide-react";
+import { Search, ShieldCheck, Truck, Users, Zap } from "lucide-react";
 import ProductCard from "./components/ProductCard";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -17,10 +17,13 @@ const CATEGORY_CHIPS = [
   { name: "Fashion", icon: "👕" },
   { name: "Beauty", icon: "💄" },
   { name: "Sports", icon: "⚽" },
+  { name: "Toys", icon: "🧸" },
+  { name: "Books", icon: "📚" },
 ];
 
 function HomeContent() {
   const dispatch = useDispatch();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const initialQuery = searchParams.get("q") ?? "";
 
@@ -66,9 +69,9 @@ function HomeContent() {
         {/* Animated Hero Section */}
         <section className="relative overflow-hidden bg-gradient-to-br from-card via-background to-card py-16 sm:py-24 border-b border-brand-light/30">
           {/* Animated floating orbs */}
-          <div className="absolute top-10 left-[10%] w-64 h-64 bg-accent/20 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-float-orb" style={{ animationDelay: "0s" }}></div>
-          <div className="absolute top-40 right-[15%] w-72 h-72 bg-brand/10 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-float-orb" style={{ animationDelay: "2s" }}></div>
-          <div className="absolute -bottom-20 left-[40%] w-80 h-80 bg-accent/15 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-float-orb" style={{ animationDelay: "4s" }}></div>
+          <div className="absolute top-10 left-[10%] w-64 h-64 bg-accent/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-60 animate-float-orb" style={{ animationDelay: "0s" }}></div>
+          <div className="absolute top-40 right-[15%] w-72 h-72 bg-brand/10 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-60 animate-float-orb" style={{ animationDelay: "2s" }}></div>
+          <div className="absolute -bottom-20 left-[40%] w-80 h-80 bg-accent/15 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-60 animate-float-orb" style={{ animationDelay: "4s" }}></div>
 
           <div className="relative max-w-6xl mx-auto px-6 text-center animate-fade-up">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent-dark font-semibold text-sm mb-6 shadow-sm border border-accent/20">
@@ -105,6 +108,22 @@ function HomeContent() {
                 Direct to Seller
               </div>
             </div>
+
+            {/* Hero CTA Buttons */}
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+              <Link
+                href="#products"
+                className="px-8 py-3.5 rounded-full bg-ink text-white font-bold text-sm hover:bg-brand-dark transition-all shadow-lg hover:-translate-y-0.5 hover:shadow-xl"
+              >
+                Shop Now
+              </Link>
+              <Link
+                href="/deals"
+                className="px-8 py-3.5 rounded-full bg-accent/10 border border-accent/30 text-accent-dark dark:text-accent font-bold text-sm hover:bg-accent hover:text-white transition-all shadow-sm hover:-translate-y-0.5 flex items-center gap-2"
+              >
+                <Zap size={15} className="fill-current" /> Browse Deals
+              </Link>
+            </div>
           </div>
         </section>
 
@@ -130,7 +149,7 @@ function HomeContent() {
                 className={`relative px-5 py-2.5 rounded-full text-sm font-bold whitespace-nowrap transition-all duration-300 snap-center flex items-center gap-2
                   ${activeCategory === c.name
                     ? "bg-ink text-white shadow-card-hover scale-105"
-                    : "bg-card text-ink/70 border border-brand-light/70 hover:border-brand/30 hover:bg-white hover:shadow-sm"
+                    : "bg-card text-ink/70 border border-brand-light/70 hover:border-brand/30 hover:bg-card hover:shadow-sm"
                   }`}
               >
                 <span>{c.icon}</span>
@@ -141,7 +160,7 @@ function HomeContent() {
         </section>
 
         {/* Product Grid */}
-        <section className="max-w-6xl mx-auto px-6 pb-20 pt-4">
+        <section id="products" className="max-w-6xl mx-auto px-6 pb-20 pt-4">
           {loading ? (
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {Array.from({ length: 8 }).map((_, i) => (
@@ -166,7 +185,7 @@ function HomeContent() {
               <p className="text-ink/60 max-w-md mx-auto mb-6">
                 We couldn't find anything matching your criteria. Try adjusting your search or selecting a different category.
               </p>
-              <button onClick={() => { setActiveCategory("All"); router.push("/"); }} className="px-6 py-2.5 rounded-full bg-ink text-white font-bold hover:bg-brand-dark transition-colors shadow-sm">
+              <button onClick={() => { setActiveCategory("All"); }} className="px-6 py-2.5 rounded-full bg-ink text-white font-bold hover:bg-brand-dark transition-colors shadow-sm">
                 View all products
               </button>
             </div>
@@ -183,7 +202,7 @@ function HomeContent() {
                 <button
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
                   disabled={page === 1}
-                  className="px-6 py-3 rounded-full border border-brand-light/80 bg-card hover:border-brand/40 hover:bg-white text-ink text-sm font-bold disabled:opacity-40 transition-all shadow-sm flex items-center gap-2"
+                  className="px-6 py-3 rounded-full border border-brand-light/80 bg-card hover:border-brand/40 hover:bg-card text-ink text-sm font-bold disabled:opacity-40 transition-all shadow-sm flex items-center gap-2"
                 >
                   Previous
                 </button>

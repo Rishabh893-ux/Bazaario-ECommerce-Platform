@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { Package, Truck, CheckCircle2, Clock, MapPin, Phone, ShieldCheck, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import Navbar from '@/app/components/Navbar';
+import Footer from '@/app/components/Footer';
 
 const TRACKING_EVENTS = [
   { status: 'Order Placed', location: 'San Francisco, CA', date: 'Aug 01, 2026 - 10:30 AM', completed: true },
@@ -14,7 +16,9 @@ const TRACKING_EVENTS = [
 
 export default function OrderTrackingPage() {
   return (
-    <div className="min-h-screen bg-background pb-20 font-sans">
+    <>
+      <Navbar />
+      <div className="min-h-screen bg-background pb-20 font-sans">
       {/* Top Banner */}
       <div className="bg-brand py-12 px-6 border-b border-brand-light/20">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -100,6 +104,8 @@ export default function OrderTrackingPage() {
 
         </div>
       </div>
-    </div>
+      </div>
+      <Footer />
+    </>
   );
 }
