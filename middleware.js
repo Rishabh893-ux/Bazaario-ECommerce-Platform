@@ -19,7 +19,7 @@ export default withAuth(
       }
 
       if (token?.role !== "VENDOR") {
-        return NextResponse.redirect(new URL("/", req.url));
+        return NextResponse.redirect(new URL("/vendor/onboarding", req.url));
       }
       // Registered but not yet approved — send to a pending-review page
       // instead of the dashboard, rather than letting them see partial data.

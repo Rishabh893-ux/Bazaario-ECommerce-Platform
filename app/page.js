@@ -113,7 +113,7 @@ function HomeContent() {
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
               <Link
                 href="#products"
-                className="px-8 py-3.5 rounded-full bg-ink text-white font-bold text-sm hover:bg-brand-dark transition-all shadow-lg hover:-translate-y-0.5 hover:shadow-xl"
+                className="px-8 py-3.5 rounded-full bg-ink text-background font-bold text-sm hover:bg-brand-dark transition-all shadow-lg hover:-translate-y-0.5 hover:shadow-xl"
               >
                 Shop Now
               </Link>
@@ -148,7 +148,7 @@ function HomeContent() {
                 onClick={() => { setActiveCategory(c.name); setPage(1); }}
                 className={`relative px-5 py-2.5 rounded-full text-sm font-bold whitespace-nowrap transition-all duration-300 snap-center flex items-center gap-2
                   ${activeCategory === c.name
-                    ? "bg-ink text-white shadow-card-hover scale-105"
+                    ? "bg-ink text-background shadow-card-hover scale-105"
                     : "bg-card text-ink/70 border border-brand-light/70 hover:border-brand/30 hover:bg-card hover:shadow-sm"
                   }`}
               >

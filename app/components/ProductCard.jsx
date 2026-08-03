@@ -49,7 +49,7 @@ export default function ProductCard({ product, onAddToCart, initialWishlisted = 
                  hover:-translate-y-1.5 hover:shadow-card-hover hover:border-accent/30"
     >
       {/* Image area */}
-      <div className="relative h-56 flex items-center justify-center overflow-hidden bg-gradient-to-br from-white to-slate-50 dark:from-card dark:to-brand/5 border-b border-brand-light/40 p-3">
+      <div className="relative h-56 flex items-center justify-center overflow-hidden bg-white border-b border-brand-light/40 p-3">
         {product.images?.[0] ? (
           <>
             <Image
