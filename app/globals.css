@@ -2,27 +2,142 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Google Fonts ─── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ─── Design Tokens ─── */
 :root {
-  --background: 255 255 255; /* Pristine White */
-  --card: 248 250 252; /* Slate-50 */
-  --text-ink: 15 23 42; /* Slate-900 */
-  --border-subtle: 226 232 240; /* Slate-200 */
+  --background: 255 255 255;
+  --card: 248 250 252;
+  --text-ink: 15 23 42;
+  --border-subtle: 226 232 240;
+  --glow-brand: rgba(210, 180, 140, 0.35);
+  --glow-accent: rgba(51, 65, 85, 0.2);
 }
 
 .dark {
-  --background: 15 23 42; /* Slate-900 */
-  --card: 30 41 59; /* Slate-800 */
-  --text-ink: 248 250 252; /* Slate-50 */
-  --border-subtle: 51 65 85; /* Slate-700 */
+  --background: 10 15 28;
+  --card: 18 26 45;
+  --text-ink: 241 245 249;
+  --border-subtle: 40 55 80;
+  --glow-brand: rgba(210, 180, 140, 0.15);
+  --glow-accent: rgba(148, 163, 184, 0.1);
+}
+
+/* ─── Base ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  @apply bg-background text-ink transition-colors duration-200 ease-in-out;
+  font-family: 'Inter', system-ui, sans-serif;
+  @apply bg-background text-ink transition-colors duration-300 ease-in-out antialiased;
 }
+
+/* ─── Keyframe Animations ─── */
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 20px var(--glow-brand); }
+  50%       { box-shadow: 0 0 45px var(--glow-brand); }
+}
+
+@keyframes floatOrb {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50%       { transform: translateY(-20px) scale(1.05); }
+}
+
+@keyframes toastSlideIn {
+  from { opacity: 0; transform: translateX(120%); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes toastSlideOut {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(120%); }
+}
+
+@keyframes progressShrink {
+  from { width: 100%; }
+  to   { width: 0%; }
+}
+
+@keyframes spinIn {
+  from { transform: rotate(-90deg) scale(0); opacity: 0; }
+  to   { transform: rotate(0deg) scale(1); opacity: 1; }
+}
+
+@keyframes popIn {
+  0%   { transform: scale(0.8); opacity: 0; }
+  70%  { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+/* ─── Utility Classes ─── */
 
 @layer utilities {
+  /* Animated underline link */
   .animated-link {
-    @apply relative inline-block transition-all duration-300 hover:text-brand hover:scale-110 origin-center;
+    @apply relative inline-block transition-all duration-300;
+  }
+  .animated-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 h-[1.5px] w-0 bg-current transition-all duration-300 rounded-full;
+  }
+  .animated-link:hover::after { width: 100%; }
+
+  /* Shimmer skeleton */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      rgb(var(--card)) 0%,
+      rgb(var(--border-subtle) / 0.6) 40%,
+      rgb(var(--card)) 80%
+    );
+    background-size: 600px 100%;
+    animation: shimmer 1.6s infinite linear;
+  }
+
+  /* Text gradient */
+  .text-gradient {
+    @apply text-transparent bg-clip-text;
+    background-image: linear-gradient(135deg, #D2B48C 0%, #C2A37E 40%, #A08060 100%);
+  }
+
+  /* Glass card */
+  .glass {
+    @apply backdrop-blur-md bg-white/10 border border-white/20;
+  }
+
+  /* Glow button */
+  .btn-glow {
+    animation: glowPulse 2.5s ease-in-out infinite;
+  }
+
+  /* Animate once on mount */
+  .animate-fade-up {
+    animation: fadeSlideUp 0.55s ease-out both;
+  }
+
+  .animate-pop-in {
+    animation: popIn 0.35s ease-out both;
   }
 }
-
