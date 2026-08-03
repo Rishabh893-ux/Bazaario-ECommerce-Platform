@@ -212,7 +212,7 @@ function HomeContent() {
                 <button
                   onClick={() => setPage((p) => p + 1)}
                   disabled={!hasMore}
-                  className="px-8 py-3 rounded-full bg-ink hover:bg-brand-dark text-white text-sm font-bold disabled:opacity-40 transition-all shadow-md flex items-center gap-2"
+                  className="px-8 py-3 rounded-full bg-ink hover:bg-brand-dark text-background hover:text-white dark:hover:text-white text-sm font-bold disabled:opacity-40 transition-all shadow-md flex items-center gap-2"
                 >
                   Next
                 </button>
