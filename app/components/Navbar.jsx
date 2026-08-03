@@ -64,7 +64,10 @@ export default function Navbar() {
 
   const navLinks = [
     { href: "/", label: "Home" },
+    { href: "/deals", label: "Deals" },
+    { href: "/blog", label: "Blog" },
     { href: "/about", label: "About" },
+    { href: "/help", label: "Help" },
     { href: "/contact", label: "Contact" },
     session?.user?.vendorId
       ? { href: "/vendor/dashboard", label: "Dashboard" }

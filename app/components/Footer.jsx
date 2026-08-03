@@ -74,6 +74,9 @@ export default function Footer() {
             <h4 className="font-black text-ink mb-6 text-sm uppercase tracking-widest">Shop</h4>
             <ul className="space-y-3.5 text-sm font-medium text-ink/60">
               <li><Link href="/" className="animated-link hover:text-brand">Browse Catalog</Link></li>
+              <li><Link href="/deals" className="animated-link hover:text-brand">Flash Deals</Link></li>
+              <li><Link href="/blog" className="animated-link hover:text-brand">Journal & Blog</Link></li>
+              <li><Link href="/help" className="animated-link hover:text-brand">Help Center</Link></li>
               <li><Link href="/orders" className="animated-link hover:text-brand">Track an Order</Link></li>
               <li><Link href="/wishlist" className="animated-link hover:text-brand">My Wishlist</Link></li>
               <li><Link href="/cart" className="animated-link hover:text-brand">Shopping Cart</Link></li>

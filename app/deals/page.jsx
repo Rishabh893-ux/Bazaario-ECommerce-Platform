@@ -4,12 +4,68 @@ import { useState, useEffect } from 'react';
 import { Timer, Zap, Flame } from 'lucide-react';
 import ProductCard from '@/app/components/ProductCard';
 
-// Extended mock product data with deal specific fields
+// Extended mock product data matching ProductCard schema
 const DEAL_PRODUCTS = [
-  { id: 101, title: 'Sony WH-1000XM5 Wireless Headphones', originalPrice: 398.00, price: 298.00, image: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=500&q=80', vendorId: 'v1', vendorName: 'ElectroHub', category: 'Electronics', stockTotal: 100, stockSold: 85 },
-  { id: 102, title: 'Vitamix Professional Series 750', originalPrice: 629.99, price: 449.99, image: 'https://images.unsplash.com/photo-1585237832815-4fa81788c03e?w=500&q=80', vendorId: 'v2', vendorName: 'KitchenPro', category: 'Home', stockTotal: 50, stockSold: 12 },
-  { id: 103, title: 'Herman Miller Aeron Chair', originalPrice: 1320.00, price: 950.00, image: 'https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?w=500&q=80', vendorId: 'v3', vendorName: 'Office Ergonomics', category: 'Furniture', stockTotal: 25, stockSold: 22 },
-  { id: 104, title: 'Dyson V15 Detect Vacuum', originalPrice: 749.99, price: 599.99, image: 'https://images.unsplash.com/photo-1558317374-067fb5f30001?w=500&q=80', vendorId: 'v2', vendorName: 'KitchenPro', category: 'Home', stockTotal: 200, stockSold: 150 },
+  { 
+    id: 101, 
+    name: 'Sony WH-1000XM5 Wireless Headphones', 
+    slug: 'sony-wh-1000xm5-wireless-headphones',
+    originalPrice: 398.00, 
+    price: 298.00, 
+    stockCount: 15,
+    ratingAvg: 4.9,
+    ratingCount: 142,
+    images: ['https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=500&q=80'], 
+    vendor: { storeName: 'ElectroHub' }, 
+    category: 'Electronics', 
+    stockTotal: 100, 
+    stockSold: 85 
+  },
+  { 
+    id: 102, 
+    name: 'Vitamix Professional Series 750', 
+    slug: 'vitamix-professional-series-750',
+    originalPrice: 629.99, 
+    price: 449.99, 
+    stockCount: 38,
+    ratingAvg: 4.8,
+    ratingCount: 95,
+    images: ['https://images.unsplash.com/photo-1585237832815-4fa81788c03e?w=500&q=80'], 
+    vendor: { storeName: 'KitchenPro' }, 
+    category: 'Home', 
+    stockTotal: 50, 
+    stockSold: 12 
+  },
+  { 
+    id: 103, 
+    name: 'Herman Miller Aeron Chair', 
+    slug: 'herman-miller-aeron-chair',
+    originalPrice: 1320.00, 
+    price: 950.00, 
+    stockCount: 3,
+    ratingAvg: 5.0,
+    ratingCount: 210,
+    images: ['https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?w=500&q=80'], 
+    vendor: { storeName: 'Office Ergonomics' }, 
+    category: 'Furniture', 
+    stockTotal: 25, 
+    stockSold: 22 
+  },
+  { 
+    id: 104, 
+    name: 'Dyson V15 Detect Vacuum', 
+    slug: 'dyson-v15-detect-vacuum',
+    originalPrice: 749.99, 
+    price: 599.99, 
+    stockCount: 50,
+    ratingAvg: 4.7,
+    ratingCount: 64,
+    images: ['https://images.unsplash.com/photo-1558317374-067fb5f30001?w=500&q=80'], 
+    vendor: { storeName: 'KitchenPro' }, 
+    category: 'Home', 
+    stockTotal: 200, 
+    stockSold: 150 
+  },
 ];
 
 export default function DealsPage() {

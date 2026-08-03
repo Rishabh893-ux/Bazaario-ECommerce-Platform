@@ -17,17 +17,61 @@ const STORE_DATA = {
 };
 
 const MOCK_PRODUCTS = [
-  { id: 1, title: 'Classic Leather Briefcase', price: 299.99, image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&q=80', vendorId: 'v1', vendorName: 'Artisan Leather Co.', category: 'Bags' },
-  { id: 2, title: 'Minimalist Cardholder', price: 45.00, image: 'https://images.unsplash.com/photo-1627123424574-724758594e93?w=500&q=80', vendorId: 'v1', vendorName: 'Artisan Leather Co.', category: 'Accessories' },
-  { id: 3, title: 'Weekender Duffle', price: 349.50, image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&q=80', vendorId: 'v1', vendorName: 'Artisan Leather Co.', category: 'Bags' },
-  { id: 4, title: 'Hand-stitched Belt', price: 85.00, image: 'https://images.unsplash.com/photo-1624222247344-550fb60583dc?w=500&q=80', vendorId: 'v1', vendorName: 'Artisan Leather Co.', category: 'Accessories' },
+  { 
+    id: 1, 
+    name: 'Classic Leather Briefcase', 
+    slug: 'classic-leather-briefcase',
+    price: 299.99, 
+    stockCount: 12,
+    ratingAvg: 4.8,
+    ratingCount: 42,
+    images: ['https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&q=80'], 
+    vendor: { storeName: 'Artisan Leather Co.' }, 
+    category: 'Bags' 
+  },
+  { 
+    id: 2, 
+    name: 'Minimalist Cardholder', 
+    slug: 'minimalist-cardholder',
+    price: 45.00, 
+    stockCount: 25,
+    ratingAvg: 5.0,
+    ratingCount: 18,
+    images: ['https://images.unsplash.com/photo-1627123424574-724758594e93?w=500&q=80'], 
+    vendor: { storeName: 'Artisan Leather Co.' }, 
+    category: 'Accessories' 
+  },
+  { 
+    id: 3, 
+    name: 'Weekender Duffle', 
+    slug: 'weekender-duffle',
+    price: 349.50, 
+    stockCount: 4,
+    ratingAvg: 4.9,
+    ratingCount: 89,
+    images: ['https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&q=80'], 
+    vendor: { storeName: 'Artisan Leather Co.' }, 
+    category: 'Bags' 
+  },
+  { 
+    id: 4, 
+    name: 'Hand-stitched Belt', 
+    slug: 'hand-stitched-belt',
+    price: 85.00, 
+    stockCount: 15,
+    ratingAvg: 4.7,
+    ratingCount: 24,
+    images: ['https://images.unsplash.com/photo-1624222247344-550fb60583dc?w=500&q=80'], 
+    vendor: { storeName: 'Artisan Leather Co.' }, 
+    category: 'Accessories' 
+  },
 ];
 
 export default function VendorStorefront() {
   const [activeTab, setActiveTab] = useState('products');
 
   return (
-    <div className="min-h-screen bg-background pb-20">
+    <div className="min-h-screen bg-background pb-20 font-sans">
       {/* Store Banner */}
       <div className="w-full h-[300px] md:h-[400px] relative">
         <img 
@@ -135,8 +179,24 @@ export default function VendorStorefront() {
           )}
 
           {activeTab === 'reviews' && (
-            <div className="text-center py-20 text-ink/50 font-medium animate-fade-up">
-              Reviews section coming soon.
+            <div className="bg-card rounded-2xl p-8 border border-brand-light/30 animate-fade-up space-y-6">
+              <h3 className="text-2xl font-black text-ink mb-4">Customer Reviews</h3>
+              <div className="border-b border-brand-light/40 pb-4">
+                <div className="flex items-center gap-2 mb-1">
+                  {[1,2,3,4,5].map(s => <Star key={s} size={14} className="fill-accent text-accent" />)}
+                  <span className="font-bold text-ink text-sm">Verified Buyer</span>
+                </div>
+                <p className="text-ink/80 text-sm font-medium">"The quality of the leather briefcase is unmatched. Exceeded my expectations!"</p>
+                <span className="text-xs text-ink/40 font-semibold mt-2 block">— Michael S., 3 days ago</span>
+              </div>
+              <div className="border-b border-brand-light/40 pb-4">
+                <div className="flex items-center gap-2 mb-1">
+                  {[1,2,3,4,5].map(s => <Star key={s} size={14} className="fill-accent text-accent" />)}
+                  <span className="font-bold text-ink text-sm">Verified Buyer</span>
+                </div>
+                <p className="text-ink/80 text-sm font-medium">"Super fast shipping and exquisite craftmanship. Will definitely order again."</p>
+                <span className="text-xs text-ink/40 font-semibold mt-2 block">— Sarah T., 1 week ago</span>
+              </div>
             </div>
           )}
 
